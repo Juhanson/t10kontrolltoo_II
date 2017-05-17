@@ -1,4 +1,5 @@
 genes/Gene.class
-genes/Application.class
-genes/Test1.class
+genes/GeneDAO.class
 genes/Allele.class
+genes/Database.class
+genes/Application.class

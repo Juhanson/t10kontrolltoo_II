@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Gene in a bottle</title>
+	<script>
+		var connection = new XMLHttpRequest();
+
+		
+		function createGene() {
+			connection.open("GET", "/creategene?alleleName=" + alleleName.value + "&parentgeneY=" + parentgeneY.value + "&parentgeneY2=" + parentgeneY2.value + "&parentgeneX=" + parentgeneX.value + "&parentgeneX2=" + parentgeneX2.value, false);
+			connection.send(null);
+			document.getElementById("childGene").innerHTML = connection.responseText;
+		}
+		
+		function findGene() {
+			connection.open("GET", "/find?findAllele=" + findAllele.value, false);
+			connection.send(null);
+			document.getElementById("searchedGene").innerHTML = connection.responseText;
+		}
+		function editGene() {
+			var allele = [];
+			var alleleName = document.getElementById("alleleNameId").innerHTML;
+			var cycle = document.getElementById("found").innerHTML;
+			for (i = 0; i < cycle; i++) {
+				if(document.getElementById("valik"+i).checked) {
+					allele.push(document.getElementById("alleleXYId"+i).innerHTML)
+					allele.push(document.getElementById("alleleXY2Id"+i).innerHTML)
+				}
+			}
+			connection.open("GET", "/creategene?alleleName=" + alleleName + "&parentgeneY=" + allele[0] + "&parentgeneY2=" + allele[1]+ "&parentgeneX=" + allele[2] + "&parentgeneX2=" + allele[3], false);
+			connection.send(null);
+			document.getElementById("chosenChildGene").innerHTML = connection.responseText;
+			
+		}
+	</script>
+	<link rel="stylesheet" href="">
+</head>
+<body>
+	<div id = "findGene">
+		Find gene:<br>
+		<input type = "text" id = "findAllele"><br>
+		<input type="button" value="Search" onclick="findGene()">	
+	</div>
+
+
+	<div id = "AddGene">
+		Name of allele:<br>
+		<input type = "text" id = "alleleName"><br>
+		Parentgene Y values:<br>
+		<input type = "text" id = "parentgeneY"><br>
+		<input type = "text" id = "parentgeneY2"><br>
+		Parentgene X values:<br>
+		<input type = "text" id = "parentgeneX"><br>
+		<input type = "text" id = "parentgeneX2"><br>
+		<input type="button" value="add" onclick="createGene()">	
+	</div>
+
+	<div id="childGene">Resulting child gene:</div>
+	<div id="chosenChildGene">Resulting child gene:</div>
+	<!-- <div id="searchedGene">Otsitud geeni väljastamise koht</div> -->
+	<table class = "genetable">
+		<thead>
+			<tr>
+				<th>id</th>
+				<th>allele_name </th>
+				<th>allele 1 </th>
+				<th>allele 2</th>
+				<th>chosen</th>
+			</tr>
+		</thead>
+		<tbody id = "searchedGene"></tbody>
+		<input type="button" value="add choice" onclick="editGene()">	
+
+
+</body>
+</html>

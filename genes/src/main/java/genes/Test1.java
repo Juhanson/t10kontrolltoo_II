@@ -1,4 +1,4 @@
-package genes;
+/*package genes;
 
 public class Test1 {
 	public static void main(String[] args) {
@@ -13,6 +13,8 @@ public class Test1 {
 		System.out.println("The allele is named: " + rhesus1.name + " and the value is: " + rhesus2.a_value);
 	}
 }
+*/
 
-
-// java -jar target/genes-0.0.1-SNAPSHOT.jar
+// scl enable rh-maven33 bash
+// mvn package
+// java -jar target/genes-1.0.jar
